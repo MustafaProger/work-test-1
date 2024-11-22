@@ -6,7 +6,7 @@ const Card = ({ product, onCardClick }) => {
 		<div
 			className='card'
 			onClick={() => onCardClick(product)}>
-			<div class='card__img'>
+			<div className='card__img'>
 				<img
 					src={product.image}
 					alt={product.name}

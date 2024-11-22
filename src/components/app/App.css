@@ -1,7 +1,10 @@
+body {
+	background-color: #f9f9f9;
+}
+
 .App {
 	font-family: "Raleway", sans-serif;
 	font-optical-sizing: auto;
-	background-color: #f9f9f9;
 	padding: 20px;
 	height: 100%;
 }
