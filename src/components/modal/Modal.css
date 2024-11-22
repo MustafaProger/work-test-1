@@ -21,8 +21,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 20px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin: 20px;
 }
 
 
@@ -39,7 +41,7 @@
 }
 
 .modal__close:hover {
-  color: #02b5e1; /* Цвет крестика при наведении */
+  color: #02b5e1;
 }
 
 .modal__image {
@@ -51,6 +53,7 @@
 .modal__text {
   flex: 1;
   margin-left: 20px;
+  min-width: 250px;
 }
 
 .modal__title {
@@ -90,4 +93,22 @@
 .modal__button:hover {
 	background-color: white;
 	color: #02b5e1;
+}
+
+@media (max-width: 1024px) {
+  .modal__close {
+    color: #02b5e1;
+  }
+}
+
+
+@media (max-width: 780px) {
+
+  .modal__content {
+    padding: 20px;
+  }
+  .modal__image {
+    max-width: 100%;
+    width: 100%;
+  }
 }
