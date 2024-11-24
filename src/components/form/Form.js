@@ -1,14 +1,42 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
+import App from "../app/App";
 import validation from "./validation";
-import phoneInput from "./phoneInput";
 import "./Form.css";
 
 class Form extends Component {
+
+	state = {
+		name: "",
+		phone: "",
+		email: "",
+	}
+
+	handleInputChange = (event) => {
+		const { id, value } = event.target;
+		this.setState({
+			[id]: value,
+		});
+		console.log(value)
+	};
+
 	handleSubmit = (event) => {
 		event.preventDefault();
-
-		validation(document.querySelector(".form"), "#name", "#phone", "#email");
+		
+		// Получаем данные из формы
+		const name = this.state.name;
+		const phone = this.state.phone;
+		const email = this.state.email;
+		const { price } = this.props; 
+	
+		if (!validation(document.querySelector(".form"), "#name", "#phone", "#email")) {
+			return; 
+		}
+	
+		const robokassaUrl = `https://auth.robokassa.ru/Merchant/Index.aspx?MerchantLogin=your_login&OutSum=${price}&InvId=${new Date().getTime()}&Desc=${encodeURIComponent('Покупка сертификата')}&Email=${email}&Phone=${phone}&Name=${encodeURIComponent(name)}&SignatureValue=your_signature`;
+	
+		// Переходим на сайт Robokassa
+		window.location.href = robokassaUrl;
 	};
 
 	handleFloatingLabel() {
@@ -17,21 +45,19 @@ class Form extends Component {
 
 		inputs.forEach((input, index) => {
 			input.addEventListener("input", () => {
-				const label = labels[index]; // Связываем конкретный инпут с его лейблом
+				const label = labels[index]; 
 				if (input.value !== "") {
 					label.style.cssText =
 						"font-size: 14px; transform: translateY(-125%);";
 				} else {
-					label.style.cssText = ""; // Возвращаем лейбл в исходное положение, если инпут пустой
+					label.style.cssText = ""; 
 				}
 			});
 		});
 	}
 
-	// Вызов метода после первого рендера компонента
 	componentDidMount() {
-		this.handleFloatingLabel(); // Вызываем функцию плавающих лейблов
-		phoneInput();
+		this.handleFloatingLabel(); 
 	}
 
 	render() {
@@ -55,6 +81,8 @@ class Form extends Component {
 							type='text'
 							className='form__input'
 							id='name'
+							value={this.state.name}
+							onChange={this.handleInputChange}
 						/>
 						<label
 							htmlFor='name'
@@ -68,8 +96,11 @@ class Form extends Component {
 						<input
 							type='tel'
 							className='form__input'
+							maxLength={18}
 							id='phone'
-							data-tel-input
+							// data-tel-input
+							value={this.state.phone}
+							onChange={this.handleInputChange}
 						/>
 						<label
 							htmlFor='phone'
@@ -83,6 +114,8 @@ class Form extends Component {
 							type='email'
 							className='form__input'
 							id='email'
+							value={this.state.email}
+							onChange={this.handleInputChange}
 						/>
 						<label
 							htmlFor='email'
@@ -105,6 +138,11 @@ class Form extends Component {
 						</button>
 					</div>
 				</div>
+				{/* <Routes>
+					<Route
+						path='/app'
+						element={<App />}></Route>
+				</Routes> */}
 			</form>
 		);
 	}

@@ -24,11 +24,10 @@ export default function validation(form, inputName, inputPhone, inputEmail) {
 
     let { name, phone, email } = message;
 
-    errorWork(nameInput, 'name', 2, name);
-    errorWork(phoneInput, 'phone', 18, phone);
+    errorWork(nameInput, 'name', 2, /\d/, name);
+    errorWork(phoneInput, 'phone', 11, /\D/, phone);
 
-    emailErrorWork();
-
+    emailErrorWork()
 
     return isValid;
 
@@ -59,12 +58,15 @@ export default function validation(form, inputName, inputPhone, inputEmail) {
         validateEmailField();
     }
 
-
-    function validationNamePhone(input, error, length, message) {
+    function validationNamePhone(input, error, length, regex, message) {
         let fieldIsValid = true;
 
         if (input.value.trim() === '') {
             error.innerHTML = message.required;
+            error.style.display = 'block';
+            fieldIsValid = false;
+        } else if (regex.test(input.value)) {
+            error.innerHTML = message.correct;
             error.style.display = 'block';
             fieldIsValid = false;
         } else if (input.value.length < length) {
@@ -77,8 +79,6 @@ export default function validation(form, inputName, inputPhone, inputEmail) {
 
         if (!fieldIsValid) isValid = false;
     }
-
-
 
     function validationEmail(input, error, regex, message) {
         let fieldIsValid = true;
@@ -97,7 +97,6 @@ export default function validation(form, inputName, inputPhone, inputEmail) {
 
         if (!fieldIsValid) isValid = false;
     }
-
 
     function createError(input, name) {
         let error = form.querySelector(`.${name}__error`);
