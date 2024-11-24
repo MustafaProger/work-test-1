@@ -57,14 +57,13 @@ const Modal = ({ product, onClose }) => {
 					</p>
 					<Link
 						className='modal__button'
-						// onClick={onClose}
 						to='/form'>
 						Купить
 					</Link>
 				</div>
 			</div>
 			<Routes>
-				<Route path="/form" element={<Form/>}></Route>
+				<Route path="/form" element={<Form product={product.name} price={product.price}/>}></Route>
 			</Routes>
 		</div>
 	);

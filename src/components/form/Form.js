@@ -1,26 +1,52 @@
 import React, { Component } from "react";
+import { Routes, Route, Link } from "react-router-dom";
+
+import App from "../app/App";
 import "./Form.css";
 
 class Form extends Component {
 	render() {
+		const { product, price } = this.props;
+
 		return (
-			<div className='modal-overlay'>
+			<form
+				className='form'
+				action='#'>
 				<div className='form__container'>
+					<h3
+						style={{
+							textAlign: "center",
+							marginBottom: 40,
+						}}>{`Сертификат от "${product}" на ${price} руб`}</h3>
 					<div className='form__group'>
 						<input
 							type='text'
 							className='form__input'
-							placeholder='Name'
+							placeholder='Имя'
 							id='name'
 							required
 						/>
 						<label
 							htmlFor='name'
 							className='form__label'>
-							Name
+							Имя<span style={{color: 'orange', fontSize: 20}}>*</span>
 						</label>
 					</div>
 
+					<div className='form__group'>
+						<input
+							type='tel'
+							className='form__input'
+							placeholder='Номер телефона'
+							id='phone'
+							required
+						/>
+						<label
+							htmlFor='phone'
+							className='form__label'>
+							Номер телефона<span style={{color: 'orange', fontSize: 20}}>*</span>
+						</label>
+					</div>
 					<div className='form__group'>
 						<input
 							type='email'
@@ -32,26 +58,26 @@ class Form extends Component {
 						<label
 							htmlFor='email'
 							className='form__label'>
-							Email
+							Почты<span style={{color: 'orange', fontSize: 20}}>*</span>
 						</label>
 					</div>
-
-					<div className='form__group'>
-						<input
-							type='text'
-							className='form__input'
-							placeholder='Subject'
-							id='subject'
-							required
-						/>
-						<label
-							htmlFor='subject'
-							className='form__label'>
-							Subject
-						</label>
+					<div class='form__btns'>
+						<Link
+							to='/'
+							className='modal__button'>
+							Назад
+						</Link>
+						<Link
+							to='https://auth.robokassa.ru/'
+							className='modal__button'>
+							Оформить
+						</Link>
 					</div>
 				</div>
-			</div>
+				{/* <Routes>
+          <Route path="/" element={<App/>}/>
+        </Routes> */}
+			</form>
 		);
 	}
 }

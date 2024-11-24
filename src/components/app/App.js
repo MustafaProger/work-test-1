@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Card from "../card/Card";
 import Modal from "../modal/Modal";
 import Navbar from "../navbar/Navbar";
-import Form from "../form/Form";
 
 import "./App.css";
 
@@ -20,15 +19,8 @@ class App extends Component {
 	state = {
 		products: [],
 		loading: true,
-		selectedProduct: {
-			description:
-				"ВкусВилл – интернет-магазин и розничная сеть супермаркетов продуктов для здорового питания.",
-			id: 2,
-			image: "https://i.ibb.co/Qk1knrH/vkusvill.jpg",
-			name: "ВкусВилл",
-			price: 1000,
-		},
-		isModalOpen: true,
+		selectedProduct: null,
+		isModalOpen: false,
 		searchValue: "",
 	};
 
@@ -87,7 +79,6 @@ class App extends Component {
 		return (
 			<div className='App'>
 				<div className='container'>
-					{/* <Form/> */}
 					<Navbar updateStateSearchValue={this.updateStateSearchValue} />
 					<h1
 						style={{ fontSize: 40, textAlign: "center", marginBottom: "50px" }}>

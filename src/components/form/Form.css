@@ -1,5 +1,5 @@
 /* Затемняющий фон */
-.modal-overlay {
+.form {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -10,64 +10,72 @@
 	justify-content: center;
 	align-items: center;
 	z-index: 999;
-  }
-  
-  /* Контейнер формы */
-  .form__container {
+}
+
+/* Контейнер формы */
+.form__container {
 	position: relative;
+	display: flex;
+	justify-content: space-around;
+	flex-direction: column;
 	background: #fff;
 	padding: 2rem;
 	border-radius: 8px;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	width: 90%;
-	max-width: 400px;
+	max-width: 500px;
 	z-index: 1000; /* Важно, чтобы форма была поверх фона */
-  }
-  
-  /* Родительский контейнер для input и label */
-  .form__group {
+}
+
+/* Родительский контейнер для input и label */
+.form__group {
 	position: relative;
-	margin-bottom: 1.5rem;
-  }
-  
-  /* Поле ввода */
-  .form__input {
+	margin-bottom: 45px;
+}
+
+/* Поле ввода */
+.form__input {
 	width: 100%;
 	height: 2.5rem;
-	padding: 0 1rem;
-	border: 1px solid #303030;
-	border-radius: 4px;
+	padding: 0;
+	border: none;
+	border-bottom: 1px solid black;
 	font-size: 1rem;
 	transition: all 250ms ease-in-out;
-  }
-  
-  /* Прячем placeholder */
-  .form__input::placeholder {
+}
+
+/* Прячем placeholder */
+.form__input::placeholder {
 	color: transparent;
-  }
-  
-  /* Метка */
-  .form__label {
+}
+
+/* Метка */
+.form__label {
 	position: absolute;
-	left: 1rem;
+	left: 0;
 	top: 50%;
 	transform: translateY(-50%);
 	font-size: 1rem;
 	color: #909090;
 	pointer-events: none;
 	transition: all 250ms ease-in-out;
-  }
-  
-  /* При фокусе на поле или заполнении */
-  .form__input:focus + .form__label,
-  .form__input:not(:placeholder-shown) + .form__label {
+}
+
+/* При фокусе на поле или заполнении */
+.form__input:focus + .form__label,
+.form__input:not(:placeholder-shown) + .form__label {
 	top: -0.75rem;
 	font-size: 0.75rem;
 	color: #303030;
-  }
-  
-  /* Стили для input при фокусе */
-  .form__input:focus {
+}
+
+/* Стили для input при фокусе */
+.form__input:focus {
 	outline: none;
-	border-color: #007bff;
-  }
+	border-color: #00b5e2;
+}
+
+.form__btns {
+	display: flex;
+	gap: 10px;
+}
