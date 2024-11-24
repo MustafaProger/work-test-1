@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Card from "../card/Card";
 import Modal from "../modal/Modal";
 import Navbar from "../navbar/Navbar";
+import Form from "../form/Form";
 
 import "./App.css";
 
@@ -19,8 +20,15 @@ class App extends Component {
 	state = {
 		products: [],
 		loading: true,
-		selectedProduct: null,
-		isModalOpen: false,
+		selectedProduct: {
+			description:
+				"ВкусВилл – интернет-магазин и розничная сеть супермаркетов продуктов для здорового питания.",
+			id: 2,
+			image: "https://i.ibb.co/Qk1knrH/vkusvill.jpg",
+			name: "ВкусВилл",
+			price: 1000,
+		},
+		isModalOpen: true,
 		searchValue: "",
 	};
 
@@ -44,21 +52,23 @@ class App extends Component {
 		});
 	};
 
-	delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+	delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 	async componentDidMount() {
 		// Таймер, чтобы подождать хотя бы 2 секунды перед загрузкой
-		await this.delay(1000);  // Задержка 2 секунды (2000 миллисекунд)
+		await this.delay(1000); // Задержка 2 секунды (2000 миллисекунд)
 
 		try {
-		  const response = await fetch("https://destiny-handy-cover.glitch.me/products");
-		  const data = await response.json();
-		  this.setState({ products: data, loading: false });  // Сохраняем данные в state
+			const response = await fetch(
+				"https://destiny-handy-cover.glitch.me/products"
+			);
+			const data = await response.json();
+			this.setState({ products: data, loading: false }); // Сохраняем данные в state
 		} catch (error) {
-		  console.error("Error:", error);
-		  this.setState({ loading: false });  // При ошибке останавливаем индикатор загрузки
+			console.error("Error:", error);
+			this.setState({ loading: false }); // При ошибке останавливаем индикатор загрузки
 		}
-	  }
+	}
 
 	render() {
 		const { products, selectedProduct, isModalOpen, searchValue, loading } =
@@ -68,8 +78,8 @@ class App extends Component {
 
 		if (loading) {
 			return (
-				<div class='loader-wrapper'>
-					<div class='custom-loader'></div>
+				<div className='loader-wrapper'>
+					<div className='custom-loader'></div>
 				</div>
 			);
 		}
@@ -77,6 +87,7 @@ class App extends Component {
 		return (
 			<div className='App'>
 				<div className='container'>
+					{/* <Form/> */}
 					<Navbar updateStateSearchValue={this.updateStateSearchValue} />
 					<h1
 						style={{ fontSize: 40, textAlign: "center", marginBottom: "50px" }}>

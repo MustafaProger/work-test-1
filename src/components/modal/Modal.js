@@ -1,4 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { Routes, Route, Link } from "react-router-dom";
+
+import App from "../app/App";
+import Form from "../form/Form";
+
 import "./Modal.css";
 
 const Modal = ({ product, onClose }) => {
@@ -50,13 +55,17 @@ const Modal = ({ product, onClose }) => {
 					<p className='modal__price'>
 						Цена: <strong>{product.price} руб</strong>
 					</p>
-					<button
+					<Link
 						className='modal__button'
-						onClick={onClose}>
+						// onClick={onClose}
+						to='/form'>
 						Купить
-					</button>
+					</Link>
 				</div>
 			</div>
+			<Routes>
+				<Route path="/form" element={<Form/>}></Route>
+			</Routes>
 		</div>
 	);
 };
